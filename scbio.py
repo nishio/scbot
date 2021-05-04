@@ -8,18 +8,22 @@ load_dotenv()
 API_ME = "https://scrapbox.io/api/users/me"
 API_IMPORT = "https://scrapbox.io/api/page-data/import/{project}.json"
 
+# init
+sid = os.getenv("SID")
+cookie = "connect.sid=" + sid
+project = os.getenv("PROJECT")
+project = "nishio-hatena"
 
-def write_pages(pages):
-    sid = os.getenv("SID")
-    project = os.getenv("PROJECT")
 
-    cookie = "connect.sid=" + sid
+def import_to(project, data):
+    """
+    data: string
+    """
     r = requests.get(API_ME, headers={"Cookie": cookie})
     r.raise_for_status()
     csrfToken = r.json()["csrfToken"]
 
     url = API_IMPORT.format(project=project)
-    data = json.dumps({"pages": pages})
     r = requests.post(
         url,
         files={"import-file": data},
@@ -30,6 +34,11 @@ def write_pages(pages):
         }
     )
     r.raise_for_status()
+
+
+def write_pages(pages):
+    data = json.dumps({"pages": pages})
+    import_to(project, data)
 
 
 def _test():
