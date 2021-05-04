@@ -54,18 +54,18 @@ def add_page(title, lines, updated):
     pages.append(page)
 
 
-for y in y_to_ym:
-    add_page(
-        title=f"Hatena{y}",
-        lines=[f"[Hatena{ym[0]}{ym[1]}]" for ym in sorted(y_to_ym[y])],
-        updated=timestamp(y, 1, 1))
+# for y in y_to_ym:
+#     add_page(
+#         title=f"Hatena{y}",
+#         lines=[f"[Hatena{ym[0]}{ym[1]}]" for ym in sorted(y_to_ym[y])],
+#         updated=timestamp(y, 1, 1))
 
-for ym in ym_to_ymd:
-    y, m = ym
-    add_page(
-        title=f"Hatena{y}{m}",
-        lines=["[Hatena%s]" % ymd for ymd in sorted(ym_to_ymd[ym])],
-        updated=timestamp(y, m, 1))
+# for ym in ym_to_ymd:
+#     y, m = ym
+#     add_page(
+#         title=f"Hatena{y}{m}",
+#         lines=["[Hatena%s]" % ymd for ymd in sorted(ym_to_ymd[ym])],
+#         updated=timestamp(y, m, 1))
 
 for ymd in ymd_to_body:
     lines = ["code:hatena"]
